@@ -52,6 +52,65 @@ The browser needs to:
 
 Understanding this complete flow is important for backend developers because backend applications communicate with clients, APIs, databases, and other services over networks.
 
+
+# Networking Fundamentals
+
+## 1. Client-to-Server Request Flow
+
+```mermaid
+flowchart TD
+    A["User enters URL"] --> B["Browser parses URL"]
+    B --> C["DNS Resolution"]
+    C --> D["Get Server IP Address"]
+    D --> E["TCP Three-Way Handshake"]
+    E --> F["TLS Handshake"]
+    F --> G["Send HTTP Request"]
+    G --> H["Load Balancer"]
+    H --> I["Spring Boot Backend"]
+    I --> J["Controller"]
+    J --> K["Service"]
+    K --> L["Repository"]
+    L --> M[("Database")]
+    M --> N["Return Response"]
+    N --> O["Browser Displays Result"]
+```
+
+## 2. DNS Resolution
+
+```mermaid
+flowchart TD
+    A["Browser requests domain"] --> B["Browser DNS Cache"]
+    B --> C{"IP found?"}
+    C -- Yes --> Z["Return IP"]
+    C -- No --> D["OS DNS Cache"]
+    D --> E{"IP found?"}
+    E -- Yes --> Z
+    E -- No --> F["Recursive DNS Resolver"]
+    F --> G["Root DNS Server"]
+    G --> H["TLD DNS Server"]
+    H --> I["Authoritative DNS Server"]
+    I --> J["Returns IP Address"]
+    J --> Z
+```
+
+## 3. TCP Three-Way Handshake
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+
+    C->>S: SYN
+    S->>C: SYN-ACK
+    C->>S: ACK
+
+    Note over C,S: TCP Connection Established
+
+    C->>S: HTTPS Request
+    S->>C: HTTPS Response
+```
+
+
 # 2. What is a URL?
 
 URL stands for **Uniform Resource Locator**.
